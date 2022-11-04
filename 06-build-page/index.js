@@ -7,23 +7,23 @@ const projectDist = path.join(__dirname, 'project-dist');
 fs.access(projectDist, error => {
   if (error) {
     createFolders();
-
   } else {
     recreateFiles();
-  }
+  };
 });
 
 function createFolders() {
   const assetsDist = path.join(__dirname, 'assets');
   const assetsCopyDist = path.join(projectDist, 'assets');
+
   fs.mkdir(projectDist, { recursive: true }, err => {
     if (err) throw err;
-    console.log(chalk.blue(`-- Folder 'project-dist' created.`))
+    console.log(chalk.blue(`-- Folder 'project-dist' created.`));
+
     fs.mkdir(assetsCopyDist, { recursive: true }, err => {
       if (err) throw err;
-      console.log(chalk.blue(`-- Folder 'assets' created.`))
-
       copyAssets(assetsDist);
+      console.log(chalk.blue(`-- Folder 'assets' created.`));
       createAndFillStyle();
       createAndFillHTML();
     });
@@ -43,8 +43,8 @@ function copyAssets(pathFile) {
     if (err) throw err;
 
     files.forEach(file => {
+      const filePath = path.join(pathFile, file);
 
-      const filePath = path.join(pathFile, file)
       fs.stat(filePath, (err, stats) => {
         if (err) throw err;
 
@@ -53,8 +53,8 @@ function copyAssets(pathFile) {
           copyAssets(filePath);
         } else {
           copyFiles(filePath, file);
-        }
-      })
+        };
+      });
     });
   });
 };
@@ -65,12 +65,11 @@ function createNewFolders(filePath, fileName) {
   fs.mkdir(newFolder, err => {
     if (err) throw err;
     console.log((chalk.blue `------ Folder '${fileName}' created.`));
-
   });
 };
 
 function copyFiles(originalPath, fileName) {
-  const fileCopy = originalPath.replace(/assets/gi, 'project-dist\\assets')
+  const fileCopy = originalPath.replace(/assets/gi, 'project-dist\\assets');
 
   fs.copyFile(originalPath, fileCopy, err => {
     if (err) throw err;
@@ -90,15 +89,15 @@ function createAndFillStyle() {
       if (err) throw err;
       files.forEach(file => {
         const pathFile = path.join(styles, file);
-        if (path.extname(pathFile) === '.css') {
 
+        if (path.extname(pathFile) === '.css') {
           fs.readFile(pathFile, 'utf-8', (err, data) => {
             if (err) throw err;
 
             fs.appendFile(stylePath, `${data}\n`, err => {
               if (err) throw err;
               console.log(chalk.yellow(`------- Find and apply CSS style '${file}'`));
-            });;
+            });
           });
         };
       });
@@ -130,7 +129,7 @@ function createAndFillHTML() {
 
           await fs.promises.readFile(fileComponents, 'utf-8')
             .then(async fileData => {
-              dataHTML = dataHTML.replace(`{{${fileName}}}`, fileData)
+              dataHTML = dataHTML.replace(`{{${fileName}}}`, fileData);
 
               await fs.promises.writeFile(mainHTML, dataHTML)
                 .then(err => {

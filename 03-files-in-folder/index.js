@@ -8,7 +8,7 @@ fs.readdir(secretPath, (err, files) => {
   if (err) throw err;
 
   files.forEach(file => {
-    const eachPath = path.join(secretPath, file)
+    const eachPath = path.join(secretPath, file);
     const name = path.parse(eachPath).name;
     const ext = path.extname(eachPath);
 
@@ -16,7 +16,7 @@ fs.readdir(secretPath, (err, files) => {
       if (err) console.log(err);
 
       const sizeBite = stat.size;
-      if (sizeBite) {
+      if (stat.isFile()) {
         console.log(chalk.green(`${name} - ${ext} - ${sizeBite} bytes`));
       };
     });

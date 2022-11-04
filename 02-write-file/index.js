@@ -5,7 +5,7 @@ const chalk = require('chalk');
 
 const newFile = path.join(__dirname, 'text.txt');
 fs.writeFile(newFile, '', (err) => {
-  if (err) throw err
+  if (err) throw err;
   console.clear();
   console.log(chalk.blue('Please enter the text:'));
 });
@@ -26,4 +26,4 @@ rl.on('line', answer => {
 function doExit() {
   console.log(chalk.red(`Thanks for testing. Everything works. I'm happy.`));
   process.exit(0);
-}
+};

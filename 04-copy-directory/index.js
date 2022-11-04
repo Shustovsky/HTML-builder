@@ -13,20 +13,13 @@ copyDir = () => {
     } else {
       recopyFiles();
       console.log(chalk.bgRed('Warning! The folder has already been created, files will be overwritten!'));
-    }
+    };
   });
 
   function createAndCopyFolder() {
     fs.mkdir(pathToCopy, { recursive: true }, err => {
       if (err) throw err;
       copyFiles();
-    });
-  };
-
-  function recopyFiles() {
-    fs.rm(pathToCopy, { recursive: true, force: true }, (err) => {
-      if (err) throw err;
-      createAndCopyFolder();
     });
   };
 
@@ -46,24 +39,12 @@ copyDir = () => {
     });
   };
 
+  function recopyFiles() {
+    fs.rm(pathToCopy, { recursive: true, force: true }, (err) => {
+      if (err) throw err;
+      createAndCopyFolder();
+    });
+  };
+
 };
 copyDir();
-
-
-
-
-
-// fs.readdir(pathToCopy, (err, files) => {
-//   if (err) throw err;
-
-//   files.forEach(file => {
-//     const fileCopy = path.join(pathToCopy, file);
-
-//     fs.unlink(fileCopy, err => {
-//       if (err) throw err;
-
-//     });
-//   });
-
-//   copyFiles();
-// });

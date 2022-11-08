@@ -128,7 +128,7 @@ function createAndFillHTML() {
 
           await fs.promises.readFile(fileComponents, 'utf-8')
             .then(async fileData => {
-              dataHTML = dataHTML.replace(`{{${fileName}}}`, fileData);
+              dataHTML = dataHTML.replaceAll(`{{${fileName}}}`, fileData);
 
               await fs.promises.writeFile(mainHTML, dataHTML)
                 .then(err => {

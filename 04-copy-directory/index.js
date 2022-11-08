@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk');
 
 copyDir = () => {
   const pathToOriginal = path.join(__dirname, 'files');
@@ -9,10 +8,10 @@ copyDir = () => {
   fs.access(pathToCopy, error => {
     if (error) {
       createAndCopyFolder();
-      console.log(chalk.bgGreen('Folder created!'));
+      console.log('Folder created!');
     } else {
       recopyFiles();
-      console.log(chalk.bgRed('Warning! The folder has already been created, files will be overwritten!'));
+      console.log('Warning! The folder has already been created, files will be overwritten!');
     };
   });
 
@@ -33,7 +32,7 @@ copyDir = () => {
 
         fs.copyFile(fileOriginal, fileCopy, err => {
           if (err) throw err;
-          console.log(chalk.green(`${file} - Copy completed.`));
+          console.log(`${file} - Copy completed.`);
         });
       });
     });

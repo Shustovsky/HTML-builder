@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
-const chalk = require('chalk');
 
 const newFile = path.join(__dirname, 'text.txt');
 fs.writeFile(newFile, '', (err) => {
   if (err) throw err;
   console.clear();
-  console.log(chalk.blue('Please enter the text:'));
+  console.log('Please enter the text:');
 });
 
 
@@ -24,6 +23,6 @@ rl.on('line', answer => {
 }).on('close', doExit);
 
 function doExit() {
-  console.log(chalk.red(`Thanks for testing. Everything works. I'm happy.`));
+  console.log(`Thanks for testing. Everything works. I'm happy.`);
   process.exit(0);
 };

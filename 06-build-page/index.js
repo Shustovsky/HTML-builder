@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk');
 
 const projectDist = path.join(__dirname, 'project-dist');
 
@@ -18,12 +17,12 @@ function createFolders() {
 
   fs.mkdir(projectDist, { recursive: true }, err => {
     if (err) throw err;
-    console.log(chalk.blue(`-- Folder 'project-dist' created.`));
+    console.log(`-- Folder 'project-dist' created.`);
 
     fs.mkdir(assetsCopyDist, { recursive: true }, err => {
       if (err) throw err;
       copyAssets(assetsDist);
-      console.log(chalk.blue(`-- Folder 'assets' created.`));
+      console.log(`-- Folder 'assets' created.`);
       createAndFillStyle();
       createAndFillHTML();
     });
@@ -33,7 +32,7 @@ function createFolders() {
 function recreateFiles() {
   fs.rm(projectDist, { recursive: true, force: true }, (err) => {
     if (err) throw err;
-    console.log(chalk.red(`---------ALL files deleted---------`));
+    console.log(`---------ALL files deleted---------`);
     createFolders();
   });
 };
@@ -64,7 +63,7 @@ function createNewFolders(filePath, fileName) {
 
   fs.mkdir(newFolder, err => {
     if (err) throw err;
-    console.log((chalk.blue `------ Folder '${fileName}' created.`));
+    console.log(`------ Folder '${fileName}' created.`);
   });
 };
 
@@ -73,7 +72,7 @@ function copyFiles(originalPath, fileName) {
 
   fs.copyFile(originalPath, fileCopy, err => {
     if (err) throw err;
-    console.log(chalk.gray(`-- ${fileName} - Copy completed.`));
+    console.log(`-- ${fileName} - Copy completed.`);
   });
 };
 
@@ -83,7 +82,7 @@ function createAndFillStyle() {
 
   fs.writeFile(stylePath, '', err => {
     if (err) throw err;
-    console.log(chalk.green(`------ Creation and recording 'style.css'.`));
+    console.log(`------ Creation and recording 'style.css'.`);
 
     fs.readdir(styles, (err, files) => {
       if (err) throw err;
@@ -96,7 +95,7 @@ function createAndFillStyle() {
 
             fs.appendFile(stylePath, `${data}\n`, err => {
               if (err) throw err;
-              console.log(chalk.yellow(`------- Find and apply CSS style '${file}'`));
+              console.log(`------- Find and apply CSS style '${file}'`);
             });
           });
         };
@@ -112,7 +111,7 @@ function createAndFillHTML() {
 
   fs.writeFile(mainHTML, '', err => {
     if (err) throw err;
-    console.log(chalk.green(`------ Creation and recording 'index.html'.`));
+    console.log(`------ Creation and recording 'index.html'.`);
   });
 
   fs.readFile(templateHTML, 'utf-8', (err, data) => {
@@ -134,7 +133,7 @@ function createAndFillHTML() {
               await fs.promises.writeFile(mainHTML, dataHTML)
                 .then(err => {
                   if (err) throw err;
-                  console.log(chalk.yellow(`------- Find and apply HTML pattern '${file}'`));
+                  console.log(`------- Find and apply HTML pattern '${file}'`);
                 });
             });
         };

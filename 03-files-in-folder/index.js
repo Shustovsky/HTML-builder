@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk');
 
 const secretPath = path.join(__dirname, 'secret-folder');
 
@@ -17,7 +16,7 @@ fs.readdir(secretPath, (err, files) => {
 
       const sizeBite = stat.size;
       if (stat.isFile()) {
-        console.log(chalk.green(`${name} - ${ext} - ${sizeBite} bytes`));
+        console.log(`${name} - ${ext} - ${sizeBite} bytes`);
       };
     });
   });
